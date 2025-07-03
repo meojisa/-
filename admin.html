@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ-панель</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        /* Дополнительные стили для формы */
+        #uploadForm label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #uploadForm input[type="text"],
+        #uploadForm input[type="number"],
+        #uploadForm textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        #uploadForm .checkbox-group {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #uploadForm .checkbox-group label {
+            display: inline-block;
+            font-weight: normal;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">
+                    <img src="https://via.placeholder.com/50x50?text=Лого" alt="Логотип Библиотеки">
+                    <span>Электронная Библиотека</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="index.html">Каталог</a>
+                </nav>
+                <div class="auth-buttons">
+                    <button id="logoutBtn" class="button small secondary">Выйти</button>
+                    <button class="theme-toggle" aria-label="Переключить тему">🌙</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content container">
+        <h2>Админ-панель</h2>
+
+        <section id="upload-section">
+            <h3>Загрузка книги</h3>
+            <form id="uploadForm">
+                <label for="title">Название книги:</label>
+                <input type="text" id="title" name="title" required>
+
+                <label for="author">Автор:</label>
+                <input type="text" id="author" name="author" required>
+
+                <label for="order_number">Порядковый номер:</label>
+                <input type="text" id="order_number" name="order_number">
+
+                <label for="full_title">Заглавие:</label>
+                <input type="text" id="full_title" name="full_title">
+
+                <label for="publication_place">Место издания:</label>
+                <input type="text" id="publication_place" name="publication_place">
+
+                <label for="publication_year">Год издания:</label>
+                <input type="number" id="publication_year" name="publication_year">
+
+                <label for="quantity_info">Количественная характеристика:</label>
+                <input type="text" id="quantity_info" name="quantity_info">
+
+                <label for="notes">Примечание:</label>
+                <textarea id="notes" name="notes" rows="2"></textarea>
+
+                <label for="section">Раздел:</label>
+                <input type="text" id="section" name="section">
+
+                <label for="isbn">Индекс ISBN:</label>
+                <input type="text" id="isbn" name="isbn">
+
+                <label for="udc_bbk_code">Шифр УДК/ББК:</label>
+                <input type="text" id="udc_bbk_code" name="udc_bbk_code">
+
+                <label for="inventory_number">Инвентарный номер:</label>
+                <input type="text" id="inventory_number" name="inventory_number">
+
+                <label for="storage_location">Место хранения:</label>
+                <input type="text" id="storage_location" name="storage_location">
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="additional_cards" name="additional_cards">
+                    <label for="additional_cards">Сведения о добавочных карточках</label>
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="lifetime_edition" name="lifetime_edition">
+                    <label for="lifetime_edition">Прижизненное издание</label>
+                </div>
+
+                <label for="author_autographs">Автографы авторов:</label>
+                <input type="text" id="author_autographs" name="author_autographs">
+
+                <label for="from_personal_collections">Из личных коллекций:</label>
+                <input type="text" id="from_personal_collections" name="from_personal_collections">
+
+                <label for="additional_info">Дополнительные сведения:</label>
+                <textarea id="additional_info" name="additional_info" rows="2"></textarea>
+
+                <label for="sender">Отправитель:</label>
+                <input type="text" id="sender" name="sender">
+
+                <label for="addressee">Адресат:</label>
+                <input type="text" id="addressee" name="addressee">
+
+                <div class="checkbox-group">
+                    <input type="checkbox" id="scanned" name="scanned">
+                    <label for="scanned">Отсканировано</label>
+                </div>
+
+                <label for="binding_type">Переплет:</label>
+                <input type="text" id="binding_type" name="binding_type">
+
+                <label for="cover_url">URL обложки:</label>
+                <input type="text" id="cover_url" name="cover_url">
+
+                <label for="file">PDF файл:</label>
+                <input type="file" id="file" name="file" accept=".pdf" required>
+
+                <button type="submit" class="button primary">Загрузить</button>
+            </form>
+        </section>
+
+        <section id="manage-books">
+            <h3>Управление книгами</h3>
+            <!-- Здесь будет список книг с возможностью редактирования и удаления -->
+        </section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Библиотека УНЦ РАН. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="admin.js"></script>
+</body>
+</html>

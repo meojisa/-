@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Читалка - Библиотека УНЦ РАН</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Библиотека для работы с PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <style>
+        /* Добавляем стили для темной темы прямо в HTML для надежности */
+        body.dark-theme {
+            background-color: #2b2c25;
+            color: #eae9e6;
+        }
+        body.dark-theme .reader-viewport {
+            background-color: #3e3a37;
+            border-color: #555;
+        }
+        body.dark-theme .book-details {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <a href="index.html" class="logo">
+                    <img src="https://via.placeholder.com/50x50?text=Лого" alt="Логотип Библиотеки">
+                    <span>Электронная Библиотека</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="index.html#catalog-section">Каталог</a>
+                    <a href="index.html#contact-section">Контакты</a>
+                </nav>
+                <div class="auth-buttons">
+                    <button id="themeToggle" class="theme-toggle" aria-label="Переключить тему">🌙</button>
+                    <button class="menu-toggle" aria-label="Открыть меню">☰</button> </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Боковое меню (гамбургер) -->
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <button class="close-menu">&times;</button>
+            <h3>Личный кабинет</h3>
+        </div>
+        <ul>
+            <li><a href="#profile-section" data-section="profile-tab"><i class="fas fa-user-edit"></i> Профиль и редактор</a></li>
+            <li><a href="#profile-section" data-section="favorites-tab"><i class="fas fa-star"></i> Избранное</a></li>
+            <li><a href="#profile-section" data-section="history-tab"><i class="fas fa-history"></i> История чтения</a></li>
+            <li><a href="#profile-section" data-section="notes-tab"><i class="fas fa-bookmark"></i> Закладки и заметки</a></li>
+            <li><a href="#profile-section" data-section="settings-tab"><i class="fas fa-cog"></i> Настройки</a></li>
+        </ul>
+    </nav>
+
+
+    <main class="main-content">
+        <section class="reader-section container">
+            <div class="book-actions-top">
+                <button id="addBookmark" class="button primary">Добавить закладку</button>
+                <button id="backToCatalog" class="button">Вернуться в каталог</button>
+            </div>
+
+            <div class="book-meta">
+                <div class="book-cover-large">
+                    <img id="bookCover" src="" alt="Обложка книги" onerror="this.src='https://via.placeholder.com/200x300?text=Нет+обложки'">
+                </div>
+                <div class="book-details">
+                    <h1 id="bookTitle">Загрузка...</h1>
+                    <p><strong>Автор:</strong> <span id="bookAuthor"> </span></p>
+                    <p><strong>Год издания:</strong> <span id="bookYear"> </span></p>
+                    <p><strong>Аннотация:</strong> <span id="bookAnnotation"> </span></p>
+                    <p><strong>Страниц:</strong> <span id="pageCount"> </span></p>
+
+                    <button class="button secondary" id="toggleDetails">Показать детали</button>
+                    <div id="bookDetails">
+                    </div>
+                </div>
+            </div>
+
+                <script>
+        // Функция для загрузки и отображения деталей книги
+        function loadBookDetails(book) {
+            const detailsDiv = document.getElementById('bookDetails');
+            
+            const detailsHTML = `
+                <div class="detail-item">
+                    <span class="detail-label">Порядковый номер:</span>
+                    <span class="detail-value">${book.order_number || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Заглавие:</span>
+                    <span class="detail-value">${book.full_title || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Место издания:</span>
+                    <span class="detail-value">${book.publication_place || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Количественная характеристика:</span>
+                    <span class="detail-value">${book.quantity_info || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Примечание:</span>
+                    <span class="detail-value">${book.notes || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Раздел:</span>
+                    <span class="detail-value">${book.section || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Индекс ISBN:</span>
+                    <span class="detail-value">${book.isbn || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Шифр УДК/ББК:</span>
+                    <span class="detail-value">${book.udc_bbk_code || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Инвентарный номер:</span>
+                    <span class="detail-value">${book.inventory_number || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Место хранения:</span>
+                    <span class="detail-value">${book.storage_location || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Сведения о добавочных карточках:</span>
+                    <span class="detail-value">${book.additional_cards || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Прижизненное издание:</span>
+                    <span class="detail-value">${book.lifetime_edition ? 'Да' : 'Нет'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Автографы авторов:</span>
+                    <span class="detail-value">${book.author_autographs || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Из личных коллекций:</span>
+                    <span class="detail-value">${book.from_personal_collections || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Дополнительные сведения:</span>
+                    <span class="detail-value">${book.additional_info || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Отправитель:</span>
+                    <span class="detail-value">${book.sender || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Адресат:</span>
+                    <span class="detail-value">${book.addressee || '—'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Отсканировано:</span>
+                    <span class="detail-value">${book.scanned ? 'Да' : 'Нет'}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Переплет:</span>
+                    <span class="detail-value">${book.binding_type || '—'}</span>
+                </div>
+            `;
+            
+            detailsDiv.innerHTML = detailsHTML;
+        }
+
+        // Обработчик кнопки "Показать детали"
+        document.getElementById('toggleDetails').addEventListener('click', function() {
+            const detailsDiv = document.getElementById('bookDetails');
+            const isExpanded = detailsDiv.classList.contains('expanded');
+            
+            if (!isExpanded && detailsDiv.innerHTML === '') {
+                // Загружаем детали только при первом открытии
+                loadBookDetails(bookData);
+            }
+            
+            detailsDiv.classList.toggle('expanded');
+            this.textContent = isExpanded ? 'Показать детали' : 'Скрыть детали';
+        });
+    </script>
+            
+            <div class="reader-viewport">
+                <canvas id="pdfCanvas"></canvas>
+                <div id="pdfLoading" style="text-align: center; padding: 20px;">
+                    Загрузка книги...
+                </div>
+                <div id="pdfError" style="display: none; color: #ff4444; text-align: center; padding: 20px;"></div>
+            </div>
+
+            <div class="page-navigation">
+                <button id="prevPage" class="button primary" disabled>Предыдущая</button>
+                <span class="page-info">Страница <span id="currentPage">1</span> из <span id="totalPages">0</span></span>
+                <button id="nextPage" class="button primary" disabled>Следующая</button>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Условия использования</a>
+                <a href="#">FAQ</a>
+            </nav>
+            <p>&copy; 2025 Библиотека УНЦ РАН. Все права защищены.</p>
+        </div>
+    </footer>
+    
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Обработчики для меню-гамбургера
+    const menuToggle = document.querySelector('.menu-toggle');
+    const sidebarMenu = document.getElementById('sidebarMenu');
+    const closeMenu = document.querySelector('.close-menu');
+
+    menuToggle.addEventListener('click', function() {
+        sidebarMenu.classList.add('open');
+        document.body.style.overflow = 'hidden'; // Блокируем прокрутку
+    });
+
+    closeMenu.addEventListener('click', function() {
+        sidebarMenu.classList.remove('open');
+        document.body.style.overflow = ''; // Восстанавливаем прокрутку
+    });
+
+    // Закрытие при клике вне меню
+    document.addEventListener('click', function(e) {
+        if (!sidebarMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+            sidebarMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        }
+    });
+
+    // Обработка кликов в меню
+    document.querySelectorAll('#sidebarMenu a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const section = this.getAttribute('data-section');
+            // Здесь можно добавить логику переключения разделов
+            alert(`Переход в раздел: ${section}`);
+            sidebarMenu.classList.remove('open');
+            document.body.style.overflow = '';
+        });
+    });
+
+            // Инициализация темы
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
+            
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-theme');
+                themeToggle.textContent = '☀️';
+            }
+
+            themeToggle.addEventListener('click', function() {
+                const isDark = body.classList.toggle('dark-theme');
+                localStorage.setItem('theme', isDark ? 'dark' : 'light');
+                themeToggle.textContent = isDark ? '☀️' : '🌙';
+            });
+
+            // Кнопка "Вернуться в каталог"
+            document.getElementById('backToCatalog').addEventListener('click', function() {
+                if (window.history.length > 1 && document.referrer.includes(window.location.hostname)) {
+                    window.history.back();
+                } else {
+                    window.location.href = 'index.html';
+                }
+            });
+        });
+    </script>
+    
+    <script src="reader.js"></script>
+</body>
+</html>

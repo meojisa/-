@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Библиотека УНЦ РАН</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header-top">
+                <a href="#" class="logo">
+                    <img src="https://via.placeholder.com/50x50?text=Лого" alt="Логотип Библиотеки">
+                    <span>Электронная Библиотека</span>
+                </a>
+                <nav class="main-nav">
+                    <a href="#catalog-section">Каталог</a>
+                    <a href="#contact-section">Контакты</a>
+
+                </nav>
+                <div class="auth-buttons">
+                 <button class="button small" id="loginBtn">
+                    <i class="fas fa-user"></i> Войти
+                </button>
+                    <button class="button small secondary" id="registerBtn">Регистрация</button>
+                    <button class="theme-toggle" aria-label="Переключить тему">🌙</button>
+                    <button class="menu-toggle" aria-label="Открыть меню">☰</button>
+                </div>
+            </div>
+            <div class="hero-banner">
+                <div class="hero-content">
+                    <div class="hero-search">
+                        <input type="text" id="heroSearchInput" placeholder="Быстрый поиск по названию или автору...">
+                        <button id="heroSearchButton">Искать книгу</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="sidebar-menu" id="sidebarMenu">
+        <button class="close-menu">×</button>
+        <h3>Личный кабинет</h3>
+        <ul>
+            <li><a href="#profile-section" data-section="profile-tab">Профиль и редактор</a></li>
+            <li><a href="#profile-section" data-section="favorites-tab">Избранное</a></li>
+            <li><a href="#profile-section" data-section="history-tab">История чтения</a></li>
+            <li><a href="#profile-section" data-section="notes-tab">Закладки и заметки</a></li>
+            <li><a href="#profile-section" data-section="settings-tab">Настройки</a></li>
+        </ul>
+    </nav>
+
+
+    <main class="main-content">
+        <section id="catalog-section" class="catalog-section container">
+            <h2>Каталог книг и поиск</h2>
+            <div class="catalog-layout">
+                <aside class="filters-panel">
+                    <h3>Параметры поиска</h3>
+                    <div class="search-form">
+                        <div class="filter-group">
+                            <label for="searchTitle">Название книги</label>
+                            <input type="text" id="searchTitle" placeholder="Введите название...">
+                        </div>
+                        <div class="filter-group">
+                            <label for="searchAuthor">Автор</label>
+                            <input type="text" id="searchAuthor" placeholder="Введите автора...">
+                        </div>
+                        <div class="filter-group">
+                            <label for="searchYear">Год издания</label>
+                            <input type="number" id="searchYear" placeholder="Например, 2020">
+                        </div>
+                        <div class="filter-group">
+                            <label for="searchKeywords">Ключевые слова</label>
+                            <input type="text" id="searchKeywords" placeholder="Несколько слов через запятую...">
+                        </div>
+                        <div class="search-form">
+    <button class="button secondary" id="toggleAdvancedFilters" style="margin-top: 15px; margin-bottom: 10px;">
+        Расширенные параметры поиска
+    </button>
+    <div id="advancedFilters" style="display: none; border-top: 1px solid var(--color-border); padding-top: 15px;">
+        <div class="filter-group">
+            <label for="filterOrderNumber">Порядковый номер</label>
+            <input type="text" id="filterOrderNumber" placeholder="Введите порядковый номер">
+        </div>
+        <div class="filter-group">
+            <label for="filterBookTitleDetailed">Заглавие</label>
+            <input type="text" id="filterBookTitleDetailed" placeholder="Полное название книги">
+        </div>
+        <div class="filter-group">
+            <label for="filterPublicationPlace">Место издания</label>
+            <input type="text" id="filterPublicationPlace" placeholder="Город издания">
+        </div>
+        <div class="filter-group">
+            <label for="filterPublicationYearDetailed">Год издания</label>
+            <input type="number" id="filterPublicationYearDetailed" placeholder="Например, 2024">
+        </div>
+        <div class="filter-group">
+            <label for="filterQuantityCharacteristic">Количественная характеристика (страницы, тома)</label>
+            <input type="text" id="filterQuantityCharacteristic" placeholder="Например, 350 стр. / Т. 1">
+        </div>
+        <div class="filter-group">
+            <label for="filterNotes">Примечание</label>
+            <textarea id="filterNotes" placeholder="Дополнительные заметки о книге" rows="2"></textarea>
+        </div>
+        <div class="filter-group">
+            <label for="filterSection">Раздел</label>
+            <input type="text" id="filterSection" placeholder="Раздел или категория">
+        </div>
+        <div class="filter-group">
+            <label for="filterIsbn">Индекс ISBN</label>
+            <input type="text" id="filterIsbn" placeholder="Например, 978-3-16-148410-0">
+        </div>
+        <div class="filter-group">
+            <label for="filterUdcBbkCode">Шифр УДК/ББК</label>
+            <input type="text" id="filterUdcBbkCode" placeholder="Например, УДК 519.7">
+        </div>
+        <div class="filter-group">
+            <label for="filterInventoryNumber">Инвентарный номер</label>
+            <input type="text" id="filterInventoryNumber" placeholder="Уникальный номер экземпляра">
+        </div>
+        <div class="filter-group">
+            <label for="filterStorageLocation">Место хранения</label>
+            <input type="text" id="filterStorageLocation" placeholder="Где хранится физически/виртуально">
+        </div>
+        <div class="filter-group checkbox-group">
+            <input type="checkbox" id="filterAdditionalCardsInfo">
+            <label for="filterAdditionalCardsInfo">Сведения о добавочных карточках</label>
+        </div>
+        <div class="filter-group checkbox-group">
+            <input type="checkbox" id="filterLifetimeEdition">
+            <label for="filterLifetimeEdition">Прижизненное издание</label>
+        </div>
+        <div class="filter-group checkbox-group">
+            <input type="checkbox" id="filterAuthorAutographs">
+            <label for="filterAuthorAutographs">Автографы авторов</label>
+        </div>
+        <div class="filter-group checkbox-group">
+            <input type="checkbox" id="filterFromPersonalCollections">
+            <label for="filterFromPersonalCollections">Из личных коллекций</label>
+        </div>
+        <div class="filter-group">
+            <label for="filterAdditionalDetails">Дополнительные сведения</label>
+            <textarea id="filterAdditionalDetails" placeholder="Любые другие важные детали" rows="2"></textarea>
+        </div>
+        <div class="filter-group">
+            <label for="filterSender">Отправитель</label>
+            <input type="text" id="filterSender" placeholder="Кто отправил книгу">
+        </div>
+        <div class="filter-group">
+            <label for="filterAddressee">Адресат</label>
+            <input type="text" id="filterAddressee" placeholder="Кому предназначалась книга">
+        </div>
+        <div class="filter-group checkbox-group">
+            <input type="checkbox" id="filterScannedStatus">
+            <label for="filterScannedStatus">Отсканировано</label>
+        </div>
+        <div class="filter-group">
+            <label for="filterBinding">Переплет</label>
+            <input type="text" id="filterBinding" placeholder="Тип переплета (твердый, мягкий)">
+        </div>
+    </div>
+                        <button class="button primary search-books-button">Применить поиск</button>
+                        <button class="button secondary reset-filters">Сбросить фильтры</button>
+                    </div>
+                </aside>
+                <div class="books-display">
+                    <div class="sort-options">
+                        <span>Сортировать по:</span>
+                        <select id="sortBooks">
+                            <option value="relevance">Релевантности</option>
+                            <option value="date-added">Дате добавления</option>
+                            <option value="alphabetical">Алфавиту (по названию)</option>
+                            <option value="author-alpha">Алфавиту (по автору)</option>
+                        </select>
+                    </div>
+                    <div id="bookList" class="book-list-view">
+                        <div class="book-list-item" data-annotation="Аннотация к книге 'Название книги 1': Эта книга рассказывает о... (длинное описание)">
+                            <div class="book-cover-small">
+                                <img src="https://via.placeholder.com/80x120?text=Обложка" alt="Обложка книги 1">
+                            </div>
+                            <div class="book-info">
+                                <h3>Название книги 1</h3>
+                                <p class="book-author">Автор: Автор И.О.</p>
+                                <p class="book-year">Год: 2023</p>
+                            </div>
+                            <div class="book-actions">
+                                <button class="button small">Читать</button>
+                                <button class="button small secondary">В избранное</button>
+                            </div>
+                        </div>
+                        <div class="book-list-item" data-annotation="Аннотация к книге 'Название книги 2': Это еще одна интересная книга...">
+                            <div class="book-cover-small">
+                                <img src="https://via.placeholder.com/80x120?text=Обложка" alt="Обложка книги 2">
+                            </div>
+                            <div class="book-info">
+                                <h3>Название книги 2</h3>
+                                <p class="book-author">Автор: Другой А.В.</p>
+                                <p class="book-year">Год: 2022</p>
+                            </div>
+                            <div class="book-actions">
+                                <button class="button small">Читать</button>
+                                <button class="button small secondary">В избранное</button>
+                            </div>
+                        </div>
+                        <p class="search-results-placeholder">Результаты поиска появятся здесь.</p>
+                    </div>
+                    <div class="pagination">
+                        <button class="page-link disabled">« Предыдущая</button>
+                        <button class="page-link active">1</button>
+                        <button class="page-link">2</button>
+                        <button class="page-link">3</button>
+                        <button class="page-link">...</button>
+                        <button class="page-link">10</button>
+                        <button class="page-link">Следующая »</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="profile-section" class="profile-section container" style="display: none;">
+            <h2>Личный кабинет</h2>
+            <div class="profile-tabs">
+                <button class="tab-button active" data-tab="profile">Профиль и редактор</button>
+                <button class="tab-button" data-tab="favorites">Избранное</button>
+                <button class="tab-button" data-tab="history">История чтения</button>
+                <button class="tab-button" data-tab="notes">Закладки и заметки</button>
+            </div>
+
+            <div id="profile" class="tab-content active">
+                <h3>Профиль пользователя</h3>
+                <p><strong>Имя пользователя:</strong></p>
+                <p><strong>Email:</strong></p>
+                <p><strong>Дата регистрации:</strong> </p>
+                <button class="button secondary" id="editProfileBtn">Редактировать профиль</button>
+            </div>
+            <div id="favorites" class="tab-content">
+                <h3>Избранные книги</h3>
+                <div class="empty-state">
+                    <p>У вас пока нет избранных книг.</p>
+                    <a href="#catalog-section" class="button primary">Перейти в каталог</a>
+                </div>
+            </div>
+            <div id="history" class="tab-content">
+                <h3>История чтения</h3>
+                <div class="empty-state">
+                    <p>История чтения пуста.</p>
+                </div>
+            </div>
+            <div id="notes" class="tab-content">
+                <h3>Закладки и заметки</h3>
+                <div class="empty-state">
+                    <p>У вас пока нет закладок или заметок.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact-section" class="contact-section container">
+            <h2>Контакты</h2>
+            <p>Если у вас есть вопросы или предложения, пожалуйста, свяжитесь с нами:</p>
+            <p>Email: <a href="mailto:info@example.com">info@example.com</a></p>
+            <p>Телефон: +7 (XXX) XXX-XX-XX</p>
+                        </div>
+        </section>
+    </main>
+     <!-- Всплывающий блок для входа -->
+    <div id="loginPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">×</span>
+            <h2>Вход</h2>
+            <form id="loginForm">
+                <!-- ИЗМЕНЕНИЕ: Добавлен div.form-group -->
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" name="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Пароль:</label>
+                    <input type="password" id="loginPassword" name="loginPassword" required>
+                </div>
+
+                <a href="#">Забыли пароль?</a>
+                <button type="submit" class="button primary">Войти</button>
+                <p>Нет аккаунта? <a href="#" id="showRegisterForm">Регистрация</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Всплывающий блок для регистрации -->
+    <div id="registerPopup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">×</span>
+            <h2>Регистрация</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Имя пользователя:</label>
+                    <input type="text" id="registerName" name="registerName" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerEmail">Email:</label>
+                    <input type="email" id="registerEmail" name="registerEmail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPassword">Пароль:</label>
+                    <input type="password" id="registerPassword" name="registerPassword" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="registerPasswordConfirm">Повторите пароль:</label>
+                    <input type="password" id="registerPasswordConfirm" name="registerPasswordConfirm" required>
+                </div>
+
+                <button type="submit" class="button primary">Зарегистрироваться</button>
+                <p>Есть аккаунт? <a href="#" id="showLoginForm">Войти</a></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Всплывающий блок для редактирования профиля -->
+    <div id="editProfilePopup" class="popup">
+        <div class="popup-content">
+            <span class="close-popup">×</span>
+            <h2>Редактировать профиль</h2>
+            <form id="editProfileForm">
+                <div class="form-group">
+                    <label for="editName">Имя пользователя:</label>
+                    <input type="text" id="editName" name="editName" value="Иван Иванов" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editPassword">Новый пароль (оставьте пустым, если не меняете):</label>
+                    <input type="password" id="editPassword" name="editPassword" placeholder="Введите новый пароль">
+                </div>
+                
+                <div class="form-group">
+                    <label for="editPasswordConfirm">Повторите новый пароль:</label>
+                    <input type="password" id="editPasswordConfirm" name="editPasswordConfirm" placeholder="Подтвердите пароль">
+                </div>
+
+                <button type="submit" class="button primary">Сохранить изменения</button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <nav class="footer-nav">
+                <a href="#">Политика конфиденциальности</a>
+                <a href="#">Условия использования</a>
+                <a href="#">FAQ</a>
+            </nav>
+            <p>© 2025 Библиотека УНЦ РАН. Все права защищены.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

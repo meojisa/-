@@ -1,0 +1,1414 @@
+/* Общие стили и сброс */
+/* Этот раздел содержит базовые стили, которые применяются ко всему сайту. Он сбрасывает некоторые дефолтные стили браузера и определяет общие свойства, такие как шрифты, отступы и цвета. */
+:root {
+    /* CSS-переменные для определения цветовой палитры и других повторяющихся значений. */
+    --color-black-olive: #3e3a37; /* Основной цвет (темно-оливковый) */
+    --color-pine-tree: #2b2c25; /* Акцентный цвет (почти черный) */
+    --color-reed-green: #6c7156; /* Дополнительный акцентный цвет (тростниково-зеленый) */
+    --color-platinum: #eae9e6; /* Цвет фона (светло-серый) */
+    --color-text-dark: #333; /* Цвет темного текста */
+    --color-text-light: #fff; /* Цвет светлого текста */
+    --color-border: #ddd; /* Цвет границ */
+    --color-shadow: rgba(0,0,0,0.1); /* Цвет тени */
+
+    /* Темная тема */
+    /* Переменные для стилей в темной теме. */
+    --dark-bg: #2b2c25; /* Темный фон */
+    --dark-text: #eae9e6; /* Светлый текст для темной темы */
+    --dark-card-bg: #3e3a37; /* Фон карточек в темной теме */
+    --dark-border: #555; /* Границы в темной теме */
+    --dark-shadow: rgba(255,255,255,0.05); /* Тени в темной теме */
+
+    /* Sidebar */
+    /* Переменные для стилей бокового меню. */
+    --sidebar-bg: #494440; /* Фон бокового меню (темнее основного) */
+    --sidebar-text: var(--color-text-light); /* Цвет текста в боковом меню */
+    --sidebar-link-hover: var(--color-reed-green); /* Цвет ссылки при наведении в боковом меню */
+}
+
+body {
+    /* Стили для всего тела документа. */
+    font-family: 'Noto Sans', sans-serif; /* Основной шрифт */
+    margin: 0; /* Убираем внешние отступы */
+    padding: 0; /* Убираем внутренние отступы */
+    background-color: var(--color-platinum); /* Цвет фона по умолчанию (светлая тема) */
+    color: var(--color-text-dark); /* Цвет текста по умолчанию */
+    line-height: 1.6; /* Межстрочный интервал */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход для цвета фона и текста при смене темы */
+}
+
+body.dark-theme {
+    /* Стили для тела документа при активной темной теме. */
+    background-color: var(--dark-bg); /* Цвет фона для темной темы */
+    color: var(--dark-text); /* Цвет текста для темной темы */
+}
+
+.container {
+    /* Стили для контейнера, ограничивающего ширину контента. */
+    max-width: 1600px; /* Максимальная ширина контейнера */
+    margin: 0 auto; /* Центрирование контейнера */
+    padding: 20px; /* Внутренние отступы */
+}
+
+a {
+    /* Стили для всех ссылок. */
+    color: var(--color-pine-tree); /* Цвет ссылок */
+    text-decoration: none; /* Убираем подчеркивание */
+    transition: color 0.3s ease; /* Плавный переход для цвета при наведении */
+}
+
+a:hover {
+    /* Стили ссылок при наведении курсора. */
+    color: var(--color-reed-green); /* Цвет ссылок при наведении */
+}
+
+body.dark-theme a {
+    /* Стили ссылок в темной теме. */
+    color: var(--color-platinum); /* Цвет ссылок в темной теме */
+}
+
+body.dark-theme a:hover {
+    /* Стили ссылок в темной теме при наведении. */
+    color: var(--color-reed-green); /* Цвет ссылок при наведении в темной теме */
+}
+
+button {
+    /* Общие стили для всех кнопок. */
+    cursor: pointer; /* Курсор в виде указателя */
+    border: none; /* Убираем границу */
+    padding: 10px 15px; /* Внутренние отступы */
+    border-radius: 5px; /* Скругление углов */
+    font-size: 1em; /* Размер шрифта */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход для фона и текста */
+}
+
+.button.primary {
+    /* Стили для основной кнопки. */
+    background-color: var(--color-pine-tree); /* Цвет фона основной кнопки */
+    color: var(--color-text-light); /* Цвет текста основной кнопки */
+}
+
+.button.primary:hover {
+    /* Стили основной кнопки при наведении. */
+    background-color: var(--color-black-olive); /* Цвет фона основной кнопки при наведении */
+}
+
+.button.secondary {
+    /* Стили для второстепенной кнопки. */
+    background-color: var(--color-reed-green); /* Цвет фона второстепенной кнопки */
+    color: var(--color-text-light); /* Цвет текста второстепенной кнопки */
+}
+
+.button.secondary:hover {
+    /* Стили второстепенной кнопки при наведении. */
+    background-color: #5a6047; /* Цвет фона второстепенной кнопки при наведении */
+}
+
+.button.small {
+    /* Стили для маленькой кнопки. */
+    padding: 8px 12px; /* Уменьшенные внутренние отступы */
+    font-size: 0.9em; /* Уменьшенный размер шрифта */
+}
+
+input[type="text"], input[type="number"], select {
+    /* Стили для текстовых полей ввода, числовых полей и выпадающих списков. */
+    padding: 10px; /* Внутренние отступы */
+    border: 1px solid var(--color-border); /* Граница */
+    border-radius: 5px; /* Скругление углов */
+    font-size: 1em; /* Размер шрифта */
+    width: 100%; /* Ширина на всю доступную область */
+    box-sizing: border-box; /* Учитывает padding и border в общей ширине */
+    background-color: var(--color-platinum); /* Цвет фона */
+    color: var(--color-text-dark); /* Цвет текста */
+    transition: border-color 0.3s ease, background-color 0.3s ease, color 0.3s ease; /* Плавный переход */
+}
+
+body.dark-theme input[type="text"],
+body.dark-theme input[type="number"],
+body.dark-theme select {
+    /* Стили полей ввода и выпадающих списков в темной теме. */
+    background-color: var(--dark-card-bg); /* Цвет фона */
+    border-color: var(--dark-border); /* Цвет границы */
+    color: var(--dark-text); /* Цвет текста */
+}
+
+/* Header */
+/* Стили для шапки сайта. */
+.header {
+    background-color: var(--color-black-olive); /* Цвет фона шапки */
+    color: var(--color-text-light); /* Цвет текста в шапке */
+    padding: 20px 0; /* Внутренние отступы сверху и снизу */
+    border-bottom: 3px solid var(--color-pine-tree); /* Нижняя граница */
+}
+
+.header-top {
+    /* Стили для верхней части шапки (логотип, навигация, кнопки). */
+    display: flex; /* Использование flexbox для выравнивания элементов */
+    justify-content: space-between; /* Распределение элементов по ширине с равными промежутками */
+    align-items: center; /* Выравнивание элементов по центру по вертикали */
+    flex-wrap: wrap; /* Перенос элементов на новую строку, если не хватает места */
+    gap: 15px; /* Промежуток между элементами */
+}
+
+.logo {
+    /* Стили для логотипа. */
+    display: flex; /* Использование flexbox */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    gap: 10px; /* Промежуток между изображением и текстом */
+    font-size: 1.5em; /* Размер шрифта */
+    font-weight: bold; /* Жирный шрифт */
+    color: var(--color-text-light); /* Цвет текста логотипа */
+}
+
+.logo img {
+    /* Стили для изображения логотипа. */
+    border-radius: 50%; /* Скругление углов для создания круглой формы */
+}
+
+.main-nav a {
+    /* Стили для ссылок основной навигации. */
+    color: var(--color-text-light); /* Цвет ссылок */
+    margin: 0 15px; /* Внешние отступы по горизонтали */
+    font-weight: bold; /* Жирный шрифт */
+}
+
+.main-nav a:hover {
+    /* Стили ссылок основной навигации при наведении. */
+    color: var(--color-reed-green); /* Цвет ссылок при наведении */
+}
+
+.auth-buttons {
+    /* Стили для кнопок аутентификации (вход/регистрация). */
+    display: flex; /* Использование flexbox */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    gap: 10px; /* Промежуток между кнопками */
+}
+
+.icon-button {
+    /* Стили для кнопок, содержащих только иконки. */
+    background: none; /* Убираем фон */
+    border: none; /* Убираем границу */
+    padding: 0; /* Убираем внутренние отступы */
+}
+
+.icon-button img {
+    /* Стили для изображений внутри кнопок-иконок. */
+    filter: invert(1); /* Инвертируем цвета для белых иконок на темном фоне */
+}
+
+.theme-toggle, .menu-toggle {
+    /* Стили для кнопок переключения темы и открытия/закрытия меню. */
+    background: none; /* Убираем фон */
+    border: 1px solid var(--color-text-light); /* Граница */
+    color: var(--color-text-light); /* Цвет текста */
+    font-size: 1.2em; /* Размер шрифта */
+    padding: 5px 10px; /* Внутренние отступы */
+    border-radius: 5px; /* Скругление углов */
+}
+
+.hero-banner {
+    /* Стили для главного баннера (герой-секции). */
+    background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1200x400?text=Фон+библиотеки') no-repeat center center/cover; /* Фон с изображением и градиентом */
+    color: var(--color-text-light); /* Цвет текста */
+    text-align: center; /* Выравнивание текста по центру */
+    padding: 80px 20px; /* Внутренние отступы */
+    margin-top: 20px; /* Внешний отступ сверху */
+    border-radius: 10px; /* Скругление углов */
+}
+
+.hero-content h1 {
+    /* Стили для заголовка внутри баннера. */
+    font-size: 2.8em; /* Размер шрифта */
+    margin-bottom: 15px; /* Внешний отступ снизу */
+    font-family: 'Noto Serif', serif; /* Шрифт с засечками */
+}
+
+.hero-content p {
+    /* Стили для параграфа внутри баннера. */
+    font-size: 1.2em; /* Размер шрифта */
+    margin-bottom: 30px; /* Внешний отступ снизу */
+}
+
+.hero-search {
+    /* Стили для формы поиска внутри баннера. */
+    display: flex; /* Использование flexbox */
+    justify-content: center; /* Центрирование элементов */
+    gap: 10px; /* Промежуток между элементами */
+    max-width: 600px; /* Максимальная ширина */
+    margin: 0 auto; /* Центрирование */
+}
+
+.hero-search input {
+    /* Стили для поля ввода в форме поиска баннера. */
+    flex-grow: 2; /* Растягивание поля ввода */
+    padding: 12px; /* Внутренние отступы */
+    border-radius: 5px; /* Скругление углов */
+    border: none; /* Убираем границу */
+    font-size: 1.1em; /* Размер шрифта */
+}
+
+.hero-search button {
+    /* Стили для кнопки в форме поиска баннера. */
+    padding: 12px 25px; /* Внутренние отступы */
+    background-color: var(--color-reed-green); /* Цвет фона */
+    color: var(--color-text-light); /* Цвет текста */
+    border-radius: 5px; /* Скругление углов */
+    font-size: 1.1em; /* Размер шрифта */
+}
+
+.hero-search button:hover {
+    /* Стили кнопки поиска баннера при наведении. */
+    background-color: #5a6047; /* Цвет фона при наведении */
+}
+
+/* Sidebar Menu (Hamburger) */
+/* Стили для бокового меню (открывающегося по "гамбургер"-иконке). */
+.sidebar-menu {
+    position: fixed; /* Фиксированное позиционирование */
+    top: 0; /* Прикрепление к верхней границе */
+    right: -300px; /* Скрыто по умолчанию (сдвинуто за правую границу) */
+    width: 280px; /* Ширина меню */
+    height: 100%; /* Высота на всю высоту окна */
+    background-color: var(--sidebar-bg); /* Цвет фона */
+    box-shadow: -5px 0 15px rgba(0,0,0,0.3); /* Тень слева */
+    padding: 20px; /* Внутренние отступы */
+    box-sizing: border-box; /* Учитывает padding в ширине */
+    transition: right 0.3s ease-in-out; /* Плавное появление/скрытие */
+    z-index: 1000; /* Поверх всех элементов */
+    color: var(--sidebar-text); /* Цвет текста */
+}
+
+.sidebar-menu.open {
+    /* Стили для открытого бокового меню. */
+    right: 0; /* Сдвигается в видимую область */
+}
+
+.sidebar-menu .close-menu {
+    /* Стили для кнопки закрытия бокового меню. */
+    background: none; /* Убираем фон */
+    border: none; /* Убираем границу */
+    color: var(--sidebar-text); /* Цвет текста */
+    font-size: 2em; /* Размер шрифта */
+    position: absolute; /* Абсолютное позиционирование */
+    top: 10px; /* Отступ сверху */
+    right: 15px; /* Отступ справа */
+    cursor: pointer; /* Курсор в виде указателя */
+}
+
+.sidebar-menu h3 {
+    /* Стили для заголовков 3 уровня в боковом меню. */
+    color: var(--color-reed-green); /* Цвет заголовка */
+    margin-top: 50px; /* Отступ сверху */
+    border-bottom: 1px solid rgba(255,255,255,0.2); /* Нижняя граница */
+    padding-bottom: 10px; /* Внутренний отступ снизу */
+    margin-bottom: 20px; /* Внешний отступ снизу */
+}
+
+.sidebar-menu ul {
+    /* Стили для неупорядоченных списков в боковом меню. */
+    list-style: none; /* Убираем маркеры списка */
+    padding: 0; /* Убираем внутренние отступы */
+    margin: 0; /* Убираем внешние отступы */
+}
+
+.sidebar-menu ul li {
+    /* Стили для элементов списка в боковом меню. */
+    margin-bottom: 10px; /* Внешний отступ снизу */
+}
+
+.sidebar-menu ul li a {
+    /* Стили для ссылок в элементах списка бокового меню. */
+    display: block; /* Отображение как блочный элемент */
+    padding: 10px 0; /* Внутренние отступы */
+    color: var(--sidebar-text); /* Цвет текста */
+    font-weight: bold; /* Жирный шрифт */
+    transition: color 0.2s ease, background-color 0.2s ease; /* Плавный переход */
+    border-radius: 5px; /* Скругление углов */
+}
+
+.sidebar-menu ul li a:hover {
+    /* Стили ссылок в боковом меню при наведении. */
+    color: var(--sidebar-link-hover); /* Цвет текста при наведении */
+    background-color: rgba(255,255,255,0.1); /* Цвет фона при наведении */
+}
+
+/* Main Content Sections */
+/* Стили для основных секций контента (например, каталог, контакты). */
+.main-content section {
+    background-color: var(--color-text-light); /* Цвет фона секции (светлая тема) */
+    margin-bottom: 30px; /* Внешний отступ снизу */
+    padding: 30px; /* Внутренние отступы */
+    border-radius: 8px; /* Скругление углов */
+    box-shadow: 0 5px 15px var(--color-shadow); /* Тень */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Плавный переход */
+}
+
+body.dark-theme .main-content section {
+    /* Стили секций контента в темной теме. */
+    background-color: var(--dark-card-bg); /* Цвет фона */
+    box-shadow: 0 5px 15px var(--dark-shadow); /* Тень */
+}
+
+h2 {
+    /* Стили для заголовков 2 уровня. */
+    color: var(--color-pine-tree); /* Цвет заголовка */
+    font-family: 'Noto Serif', serif; /* Шрифт с засечками */
+    border-bottom: 2px solid var(--color-border); /* Нижняя граница */
+    padding-bottom: 10px; /* Внутренний отступ снизу */
+    margin-bottom: 20px; /* Внешний отступ снизу */
+    font-size: 2em; /* Размер шрифта */
+}
+
+body.dark-theme h2 {
+    /* Стили заголовков 2 уровня в темной теме. */
+    color: var(--color-reed-green); /* Цвет заголовка */
+    border-bottom-color: var(--dark-border); /* Цвет нижней границы */
+}
+
+h3 {
+    /* Стили для заголовков 3 уровня. */
+    color: var(--color-black-olive); /* Цвет заголовка */
+    font-family: 'Noto Serif', serif; /* Шрифт с засечками */
+    margin-top: 0; /* Убираем верхний отступ */
+    margin-bottom: 15px; /* Внешний отступ снизу */
+}
+
+body.dark-theme h3 {
+    /* Стили заголовков 3 уровня в темной теме. */
+    color: var(--color-platinum); /* Цвет заголовка */
+}
+
+/* Catalog Section */
+/* Стили для секции каталога книг. */
+.catalog-layout {
+    display: grid; /* Использование CSS Grid для макета */
+    grid-template-columns: 300px 1fr; /* Колонка для фильтров (300px) и колонка для контента (остальное пространство) */
+    gap: 30px; /* Промежуток между колонками */
+}
+
+.filters-panel {
+    /* Стили для панели фильтров. */
+    background-color: var(--color-platinum); /* Цвет фона */
+    padding: 20px; /* Внутренние отступы */
+    border-radius: 8px; /* Скругление углов */
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05); /* Внутренняя тень */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Плавный переход */
+}
+
+body.dark-theme .filters-panel {
+    /* Стили панели фильтров в темной теме. */
+    background-color: var(--dark-bg); /* Цвет фона */
+    box-shadow: inset 0 0 10px rgba(255,255,255,0.05); /* Внутренняя тень */
+}
+
+.filters-panel h3 {
+    /* Стили заголовков в панели фильтров. */
+    margin-top: 0; /* Убираем верхний отступ */
+    color: var(--color-pine-tree); /* Цвет заголовка */
+    border-bottom: 1px solid var(--color-border); /* Нижняя граница */
+    padding-bottom: 10px; /* Внутренний отступ снизу */
+    margin-bottom: 20px; /* Внешний отступ снизу */
+}
+
+body.dark-theme .filters-panel h3 {
+    /* Стили заголовков панели фильтров в темной теме. */
+    color: var(--color-reed-green); /* Цвет заголовка */
+    border-bottom-color: var(--dark-border); /* Цвет нижней границы */
+}
+
+.search-form {
+    /* Стили для формы поиска. */
+    display: flex; /* Использование flexbox */
+    flex-direction: column; /* Элементы располагаются вертикально */
+    gap: 15px; /* Промежутки между группами фильтров */
+}
+
+.filter-group label {
+    /* Стили для меток фильтров. */
+    display: block; /* Отображение как блочный элемент */
+    margin-bottom: 5px; /* Внешний отступ снизу */
+    font-weight: bold; /* Жирный шрифт */
+    color: var(--color-black-olive); /* Цвет текста */
+}
+
+body.dark-theme .filter-group label {
+    /* Стили меток фильтров в темной теме. */
+    color: var(--color-platinum); /* Цвет текста */
+}
+
+.search-books-button, .reset-filters {
+    /* Стили для кнопок поиска книг и сброса фильтров. */
+    width: 100%; /* Ширина на всю доступную область */
+    margin-top: 5px; /* Внешний отступ сверху */
+}
+
+.sort-options {
+    /* Стили для опций сортировки. */
+    display: flex; /* Использование flexbox */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    gap: 10px; /* Промежуток между элементами */
+    margin-bottom: 20px; /* Внешний отступ снизу */
+    justify-content: flex-end; /* Выравнивание по правому краю */
+}
+
+.sort-options select {
+    /* Стили для выпадающего списка сортировки. */
+    width: auto; /* Автоматическая ширина */
+}
+
+/* Списковое отображение книг */
+/* Стили для отображения списка книг. */
+.book-list-view {
+    display: flex; /* Использование flexbox */
+    flex-direction: column; /* Элементы располагаются вертикально */
+    gap: 15px; /* Промежуток между элементами списка */
+    position: relative; /* Для позиционирования аннотации */
+}
+
+.book-list-item {
+    /* Стили для каждого элемента в списке книг. */
+    display: flex; /* Использование flexbox */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    background-color: var(--color-platinum); /* Светлый фон для элементов списка */
+    border: 1px solid var(--color-border); /* Граница */
+    border-radius: 8px; /* Скругление углов */
+    padding: 15px; /* Внутренние отступы */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05); /* Тень */
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease; /* Плавный переход */
+    position: relative; /* Для всплывающей аннотации */
+    cursor: pointer; /* Курсор в виде указателя */
+}
+
+body.dark-theme .book-list-item {
+    /* Стили элементов списка книг в темной теме. */
+    background-color: var(--dark-bg); /* Цвет фона */
+    border-color: var(--dark-border); /* Цвет границы */
+    box-shadow: 0 2px 8px var(--dark-shadow); /* Тень */
+}
+
+.book-list-item:hover {
+    /* Стили элементов списка книг при наведении. */
+    transform: translateY(-3px); /* Небольшой сдвиг вверх */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* Увеличенная тень */
+}
+
+/* Аннотация при наведении */
+/* Стили для всплывающей аннотации при наведении на элемент списка книг. */
+.book-list-item::after {
+    content: attr(data-annotation); /* Содержимое берется из атрибута data-annotation */
+    position: absolute; /* Абсолютное позиционирование */
+    left: 100%; /* Появляется справа от элемента */
+    top: 50%; /* Выравнивание по центру по вертикали */
+    transform: translateY(-50%) translateX(15px); /* Смещение для центрирования и отступа */
+    background-color: var(--color-pine-tree); /* Цвет фона */
+    color: var(--color-text-light); /* Цвет текста */
+    padding: 10px 15px; /* Внутренние отступы */
+    border-radius: 5px; /* Скругление углов */
+    white-space: normal; /* Разрешить перенос текста */
+    max-width: 300px; /* Максимальная ширина */
+    opacity: 0; /* Прозрачность (скрыто) */
+    visibility: hidden; /* Скрыто */
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease; /* Плавное появление/скрытие */
+    z-index: 10; /* Поверх других элементов */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2); /* Тень */
+}
+
+.book-list-item:hover::after {
+    /* Стили аннотации при наведении на элемент списка книг. */
+    opacity: 1; /* Полностью видно */
+    visibility: visible; /* Видимо */
+    transform: translateY(-50%) translateX(10px); /* Небольшое смещение при появлении */
+}
+
+.book-cover-small img {
+    /* Стили для маленькой обложки книги в списке. */
+    width: 80px; /* Ширина */
+    height: 120px; /* Высота */
+    object-fit: cover; /* Обрезка изображения для заполнения */
+    border-radius: 4px; /* Скругление углов */
+    margin-right: 15px; /* Внешний отступ справа */
+    flex-shrink: 0; /* Запрещает сжиматься */
+}
+
+.book-info {
+    /* Стили для информационного блока книги в списке. */
+    flex-grow: 1; /* Растягивание для заполнения оставшегося пространства */
+    text-align: left; /* Выравнивание текста по левому краю */
+}
+
+.book-info h3 {
+    /* Стили для заголовка книги в списке. */
+    font-size: 1.1em; /* Размер шрифта */
+    margin: 0 0 5px; /* Отступы */
+    color: var(--color-pine-tree); /* Цвет текста */
+}
+
+body.dark-theme .book-info h3 {
+    /* Стили заголовка книги в списке в темной теме. */
+    color: var(--color-platinum); /* Цвет текста */
+}
+
+.book-info p {
+    /* Стили для параграфов с информацией о книге в списке. */
+    font-size: 0.85em; /* Размер шрифта */
+    color: #666; /* Цвет текста */
+    margin: 0 0 3px; /* Отступы */
+}
+
+body.dark-theme .book-info p {
+    /* Стили параграфов с информацией о книге в списке в темной теме. */
+    color: #bbb; /* Цвет текста */
+}
+
+.book-actions {
+    /* Стили для блока кнопок действий с книгой в списке. */
+    display: flex; /* Использование flexbox */
+    flex-direction: column; /* Элементы располагаются вертикально */
+    gap: 8px; /* Промежуток между кнопками */
+    margin-left: 15px; /* Внешний отступ слева */
+    flex-shrink: 0; /* Запрещает сжиматься */
+}
+
+.search-results-placeholder {
+    /* Стили для заглушки, когда нет результатов поиска. */
+    text-align: center; /* Выравнивание текста по центру */
+    color: #777; /* Цвет текста */
+    padding: 50px 0; /* Внутренние отступы */
+}
+
+.pagination {
+    /* Стили для блока пагинации. */
+    display: flex; /* Использование flexbox */
+    justify-content: center; /* Центрирование элементов */
+    margin-top: 30px; /* Внешний отступ сверху */
+    gap: 5px; /* Промежуток между элементами пагинации */
+}
+
+.page-link {
+    /* Стили для ссылок пагинации. */
+    background-color: var(--color-platinum); /* Цвет фона */
+    border: 1px solid var(--color-border); /* Граница */
+    padding: 8px 15px; /* Внутренние отступы */
+    border-radius: 5px; /* Скругление углов */
+    color: var(--color-black-olive); /* Цвет текста */
+}
+
+body.dark-theme .page-link {
+    /* Стили ссылок пагинации в темной теме. */
+    background-color: var(--dark-card-bg); /* Цвет фона */
+    border-color: var(--dark-border); /* Цвет границы */
+    color: var(--dark-text); /* Цвет текста */
+}
+
+.page-link.active {
+    /* Стили активной ссылки пагинации. */
+    background-color: var(--color-pine-tree); /* Цвет фона */
+    color: var(--color-text-light); /* Цвет текста */
+    border-color: var(--color-pine-tree); /* Цвет границы */
+}
+
+body.dark-theme .page-link.active {
+    /* Стили активной ссылки пагинации в темной теме. */
+    background-color: var(--color-reed-green); /* Цвет фона */
+    border-color: var(--color-reed-green); /* Цвет границы */
+}
+
+.page-link:hover:not(.active):not(.disabled) {
+    /* Стили ссылок пагинации при наведении (если не активна и не отключена). */
+    background-color: var(--color-border); /* Цвет фона */
+}
+
+body.dark-theme .page-link:hover:not(.active):not(.disabled) {
+    /* Стили ссылок пагинации при наведении в темной теме. */
+    background-color: #444; /* Цвет фона */
+}
+
+.page-link.disabled {
+    /* Стили отключенных ссылок пагинации. */
+    opacity: 0.6; /* Прозрачность */
+    cursor: not-allowed; /* Курсор "запрещено" */
+}
+
+/* Profile Section (скрыт по умолчанию, показывается через JS) */
+/* Стили для секции профиля пользователя. */
+.profile-section {
+    display: none; /* Скрыто по умолчанию (управляется через JS) */
+}
+
+.profile-tabs {
+    /* Стили для вкладок профиля. */
+    display: flex; /* Использование flexbox */
+    margin-bottom: 20px; /* Внешний отступ снизу */
+    border-bottom: 1px solid var(--color-border); /* Нижняя граница */
+    overflow-x: auto; /* Позволяет прокрутку по горизонтали */
+    -webkit-overflow-scrolling: touch; /* Улучшенная прокрутка на iOS */
+}
+
+body.dark-theme .profile-tabs {
+    /* Стили вкладок профиля в темной теме. */
+    border-bottom-color: var(--dark-border); /* Цвет нижней границы */
+}
+
+.profile-tabs .tab-button {
+    /* Стили для кнопок вкладок профиля. */
+    background-color: var(--color-platinum); /* Цвет фона */
+    border: none; /* Убираем границу */
+    padding: 12px 20px; /* Внутренние отступы */
+    cursor: pointer; /* Курсор в виде указателя */
+    font-size: 1em; /* Размер шрифта */
+    border-radius: 8px 8px 0 0; /* Скругление углов сверху */
+    margin-right: 5px; /* Внешний отступ справа */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Плавный переход */
+    white-space: nowrap; /* Запрет переноса текста */
+}
+
+body.dark-theme .profile-tabs .tab-button {
+    /* Стили кнопок вкладок профиля в темной теме. */
+    background-color: var(--dark-card-bg); /* Цвет фона */
+    color: var(--dark-text); /* Цвет текста */
+}
+
+.profile-tabs .tab-button.active {
+    /* Стили активной кнопки вкладки профиля. */
+    background-color: var(--color-pine-tree); /* Цвет фона */
+    color: var(--color-text-light); /* Цвет текста */
+    border-bottom: 3px solid var(--color-reed-green); /* Нижняя граница */
+    padding-bottom: 9px; /* Компенсация границы */
+}
+
+body.dark-theme .profile-tabs .tab-button.active {
+    /* Стили активной кнопки вкладки профиля в темной теме. */
+    background-color: var(--color-reed-green); /* Цвет фона */
+    color: var(--color-text-light); /* Цвет текста */
+    border-bottom-color: var(--color-platinum); /* Цвет нижней границы */
+}
+
+.profile-tabs .tab-button:hover:not(.active) {
+    /* Стили кнопок вкладок профиля при наведении (если не активна). */
+    background-color: var(--color-border); /* Цвет фона */
+}
+
+body.dark-theme .profile-tabs .tab-button:hover:not(.active) {
+    /* Стили кнопок вкладок профиля при наведении в темной теме. */
+    background-color: #444; /* Цвет фона */
+}
+
+.tab-content {
+    /* Стили для содержимого вкладок профиля. */
+    display: none; /* Скрыто по умолчанию */
+    padding: 20px 0; /* Внутренние отступы */
+}
+
+.tab-content.active {
+    /* Стили активного содержимого вкладки профиля. */
+    display: block; /* Отображается */
+}
+
+.tab-content p {
+    /* Стили параграфов в содержимом вкладок профиля. */
+    margin-bottom: 10px; /* Внешний отступ снизу */
+}
+
+.empty-state {
+    /* Стили для состояния "пусто" (например, нет закладок). */
+    text-align: center; /* Выравнивание текста по центру */
+    padding: 40px 20px; /* Внутренние отступы */
+    background-color: var(--color-platinum); /* Цвет фона */
+    border-radius: 8px; /* Скругление углов */
+    border: 1px dashed var(--color-border); /* Пунктирная граница */
+    color: #777; /* Цвет текста */
+    margin-top: 20px; /* Внешний отступ сверху */
+}
+
+body.dark-theme .empty-state {
+    /* Стили состояния "пусто" в темной теме. */
+    background-color: var(--dark-bg); /* Цвет фона */
+    border-color: var(--dark-border); /* Цвет границы */
+    color: #aaa; /* Цвет текста */
+}
+
+.setting-item {
+    /* Стили для каждого элемента настройки. */
+    display: flex; /* Использование flexbox */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    gap: 15px; /* Промежуток между элементами */
+    margin-bottom: 15px; /* Внешний отступ снизу */
+    padding: 10px 0; /* Внутренние отступы */
+    border-bottom: 1px solid var(--color-border); /* Нижняя граница */
+}
+
+body.dark-theme .setting-item {
+    /* Стили элементов настройки в темной теме. */
+    border-bottom-color: var(--dark-border); /* Цвет нижней границы */
+}
+
+.setting-item:last-child {
+    /* Стили для последнего элемента настройки (убираем нижнюю границу). */
+    border-bottom: none; /* Убираем нижнюю границу */
+}
+
+.setting-item label {
+    /* Стили для меток элементов настройки. */
+    font-weight: bold; /* Жирный шрифт */
+    min-width: 180px; /* Минимальная ширина */
+}
+
+.setting-item input[type="range"] {
+    /* Стили для ползунка (range input). */
+    flex-grow: 1; /* Растягивается для заполнения пространства */
+    -webkit-appearance: none; /* Сброс стандартных стилей WebKit */
+    appearance: none; /* Сброс стандартных стилей */
+    height: 8px; /* Высота ползунка */
+    background: var(--color-border); /* Цвет фона ползунка */
+    border-radius: 5px; /* Скругление углов */
+    outline: none; /* Убираем обводку при фокусе */
+    opacity: 0.7; /* Прозрачность */
+    transition: opacity .2s; /* Плавный переход для прозрачности */
+}
+
+body.dark-theme .setting-item input[type="range"] {
+    /* Стили ползунка в темной теме. */
+    background: var(--dark-border); /* Цвет фона */
+}
+
+.setting-item input[type="range"]::-webkit-slider-thumb {
+    /* Стили для бегунка ползунка в WebKit-браузерах. */
+    -webkit-appearance: none; /* Сброс стандартных стилей */
+    appearance: none; /* Сброс стандартных стилей */
+    width: 20px; /* Ширина бегунка */
+    height: 20px; /* Высота бегунка */
+    background: var(--color-pine-tree); /* Цвет фона бегунка */
+    border-radius: 50%; /* Скругление углов (круглая форма) */
+    cursor: pointer; /* Курсор в виде указателя */
+}
+
+body.dark-theme .setting-item input[type="range"]::-webkit-slider-thumb {
+    /* Стили бегунка ползунка в темной теме (WebKit). */
+    background: var(--color-reed-green); /* Цвет фона */
+}
+
+.setting-item input[type="range"]::-moz-range-thumb {
+    /* Стили для бегунка ползунка в Firefox. */
+    width: 20px; /* Ширина бегунка */
+    height: 20px; /* Высота бегунка */
+    background: var(--color-pine-tree); /* Цвет фона бегунка */
+    border-radius: 50%; /* Скругление углов (круглая форма) */
+    cursor: pointer; /* Курсор в виде указателя */
+}
+
+body.dark-theme .setting-item input[type="range"]::-moz-range-thumb {
+    /* Стили бегунка ползунка в темной теме (Firefox). */
+    background: var(--color-reed-green); /* Цвет фона */
+}
+
+/* Contact Section */
+/* Стили для секции контактов. */
+.social-links {
+    margin-top: 20px; /* Внешний отступ сверху */
+    display: flex; /* Использование flexbox */
+    gap: 15px; /* Промежуток между элементами */
+    justify-content: center; /* Центрирование элементов */
+}
+
+.social-links img {
+    /* Стили для изображений социальных ссылок. */
+    width: 30px; /* Ширина */
+    height: 30px; /* Высота */
+    filter: invert(0.2); /* Небольшая инверсия цвета */
+    transition: filter 0.3s ease; /* Плавный переход */
+}
+
+body.dark-theme .social-links img {
+    /* Стили изображений социальных ссылок в темной теме. */
+    filter: invert(0.8); /* Более сильная инверсия */
+}
+
+.social-links img:hover {
+    /* Стили изображений социальных ссылок при наведении. */
+    filter: invert(0); /* Сброс инверсии */
+}
+
+body.dark-theme .social-links img:hover {
+    /* Стили изображений социальных ссылок при наведении в темной теме. */
+    filter: invert(1); /* Полная инверсия */
+}
+
+/* Footer */
+/* Стили для подвала сайта. */
+.footer {
+    background-color: var(--color-pine-tree); /* Цвет фона */
+    color: var(--color-platinum); /* Цвет текста */
+    padding: 20px 0; /* Внутренние отступы */
+    text-align: center; /* Выравнивание текста по центру */
+    font-size: 0.9em; /* Размер шрифта */
+    border-top: 3px solid var(--color-reed-green); /* Верхняя граница */
+}
+
+.footer-nav a {
+    /* Стили для ссылок в навигации подвала. */
+    color: var(--color-platinum); /* Цвет текста */
+    margin: 0 10px; /* Внешние отступы */
+}
+
+.footer-nav a:hover {
+    /* Стили ссылок в навигации подвала при наведении. */
+    color: var(--color-text-light); /* Цвет текста */
+}
+
+/* Responsive adjustments */
+/* Стили для адаптивного дизайна (медиа-запросы). */
+@media (max-width: 992px) {
+    /* Стили для экранов шириной до 992px. */
+    .catalog-layout {
+        grid-template-columns: 1fr; /* Одна колонка для каталога */
+    }
+
+    .filters-panel {
+        margin-bottom: 20px; /* Внешний отступ снизу */
+    }
+
+    .header-top {
+        flex-direction: column; /* Элементы располагаются вертикально */
+        text-align: center; /* Выравнивание текста по центру */
+    }
+
+    .main-nav {
+        margin-top: 15px; /* Внешний отступ сверху */
+    }
+
+    .auth-buttons {
+        margin-top: 15px; /* Внешний отступ сверху */
+        flex-wrap: wrap; /* Перенос элементов на новую строку */
+        justify-content: center; /* Центрирование элементов */
+    }
+
+    .hero-banner {
+        padding: 60px 20px; /* Внутренние отступы */
+    }
+
+    .hero-content h1 {
+        font-size: 2.2em; /* Размер шрифта */
+    }
+
+    .hero-search {
+        flex-direction: column; /* Элементы располагаются вертикально */
+    }
+
+    .hero-search input, .hero-search button {
+        width: 100%; /* Ширина на всю доступную область */
+    }
+
+    .book-list-item::after { /* Аннотация на мобильных */
+        left: 50%; /* Сдвиг к центру */
+        top: 105%; /* Появляется снизу */
+        transform: translateX(-50%) translateY(10px); /* Смещение для центрирования и отступа */
+        white-space: normal; /* Разрешить перенос текста */
+        max-width: 90%; /* Максимальная ширина */
+    }
+
+    .book-list-item:hover::after {
+        transform: translateX(-50%) translateY(5px); /* Небольшое смещение при появлении */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Стили для экранов шириной до 768px. */
+    .container {
+        padding: 15px; /* Уменьшенные внутренние отступы */
+    }
+
+    .header-top, .main-nav, .auth-buttons {
+        gap: 10px; /* Уменьшенные промежутки */
+    }
+
+    .main-nav a {
+        margin: 0 8px; /* Уменьшенные отступы */
+    }
+
+    h2 {
+        font-size: 1.8em; /* Уменьшенный размер шрифта */
+    }
+
+    .book-list-item {
+        flex-wrap: wrap; /* Перенос элементов на новую строку */
+        justify-content: center; /* Центрирование элементов */
+        text-align: center; /* Выравнивание текста по центру */
+    }
+    .book-cover-small {
+        margin-right: 0; /* Убираем правый отступ */
+        margin-bottom: 10px; /* Добавляем нижний отступ */
+    }
+    .book-info {
+        text-align: center; /* Выравнивание текста по центру */
+        width: 100%; /* Ширина на всю доступную область */
+    }
+    .book-actions {
+        flex-direction: row; /* Элементы располагаются горизонтально */
+        margin-left: 0; /* Убираем левый отступ */
+        margin-top: 10px; /* Добавляем верхний отступ */
+        width: 100%; /* Ширина на всю доступную область */
+        justify-content: center; /* Центрирование элементов */
+    }
+    .book-actions button {
+        flex-grow: 1; /* Растягивание кнопок */
+    }
+
+    .profile-tabs {
+        flex-wrap: wrap; /* Перенос элементов на новую строку */
+    }
+
+    .profile-tabs .tab-button {
+        width: 100%; /* Ширина на всю доступную область */
+        margin-right: 0; /* Убираем правый отступ */
+        margin-bottom: 5px; /* Добавляем нижний отступ */
+    }
+
+    .setting-item {
+        flex-direction: column; /* Элементы располагаются вертикально */
+        align-items: flex-start; /* Выравнивание по левому краю */
+        gap: 5px; /* Уменьшенный промежуток */
+    }
+    .sidebar-menu {
+        width: 100%; /* Ширина на всю доступную область */
+        right: -100%; /* Скрыто за правую границу */
+    }
+}
+
+@media (max-width: 480px) {
+    /* Стили для экранов шириной до 480px. */
+    .header-top {
+        padding-bottom: 15px; /* Внутренний отступ снизу */
+        border-bottom: 1px solid rgba(255,255,255,0.2); /* Нижняя граница */
+    }
+    .hero-banner {
+        padding: 40px 15px; /* Уменьшенные внутренние отступы */
+    }
+    .hero-content h1 {
+        font-size: 1.8em; /* Уменьшенный размер шрифта */
+    }
+    .hero-content p {
+        font-size: 1em; /* Уменьшенный размер шрифта */
+    }
+    .footer-nav {
+        flex-direction: column; /* Элементы располагаются вертикально */
+        gap: 5px; /* Уменьшенный промежуток */
+    }
+}
+/* Reader Section */
+/* Стили для секции читалки. */
+.reader-section {
+    display: flex; /* Использование flexbox */
+    flex-direction: column; /* Элементы располагаются вертикально */
+    gap: 20px; /* Промежуток между элементами */
+}
+
+.book-meta {
+    /* Стили для метаданных книги (обложка + информация). */
+    display: flex; /* Использование flexbox */
+    gap: 30px; /* Промежуток между элементами */
+    margin-bottom: 20px; /* Внешний отступ снизу */
+    flex-wrap: wrap; /* Перенос элементов на новую строку */
+}
+
+.book-cover-large img {
+    /* Стили для большой обложки книги в читалке. */
+    width: 200px; /* Ширина */
+    height: 300px; /* Высота */
+    object-fit: cover; /* Обрезка изображения для заполнения */
+    border-radius: 5px; /* Скругление углов */
+    box-shadow: 0 5px 15px var(--color-shadow); /* Тень */
+}
+
+.book-details {
+    /* Стили для блока деталей книги. */
+    flex: 1; /* Растягивание для заполнения пространства */
+    min-width: 300px; /* Минимальная ширина */
+}
+
+.book-details h1 {
+    /* Стили для заголовка книги в читалке. */
+    margin-top: 0; /* Убираем верхний отступ */
+    color: var(--color-pine-tree); /* Цвет текста */
+    font-family: 'Noto Serif', serif; /* Шрифт с засечками */
+}
+
+body.dark-theme .book-details h1 {
+    /* Стили заголовка книги в читалке в темной теме. */
+    color: var(--color-reed-green); /* Цвет текста */
+}
+
+.book-details p {
+    /* Стили для параграфов с деталями книги. */
+    margin-bottom: 10px; /* Внешний отступ снизу */
+}
+
+.reader-controls {
+    /* Стили для элементов управления читалкой (навигация, полноэкранный режим). */
+    display: flex; /* Использование flexbox */
+    align-items: center; /* Выравнивание по центру по вертикали */
+    gap: 15px; /* Промежуток между элементами */
+    flex-wrap: wrap; /* Перенос элементов на новую строку */
+    padding: 15px 0; /* Внутренние отступы */
+    border-top: 1px solid var(--color-border); /* Верхняя граница */
+    border-bottom: 1px solid var(--color-border); /* Нижняя граница */
+}
+
+body.dark-theme .reader-controls {
+    /* Стили элементов управления читалкой в темной теме. */
+    border-color: var(--dark-border); /* Цвет границы */
+}
+
+.reader-viewport {
+    /* Стили для области отображения книги. */
+    width: 100%; /* Ширина на всю доступную область */
+    overflow: auto; /* Полосы прокрутки, если контент не помещается */
+    border: 1px solid var(--color-border); /* Граница */
+    border-radius: 5px; /* Скругление углов */
+    background-color: var(--color-platinum); /* Цвет фона */
+    min-height: 500px; /* Минимальная высота */
+    display: flex; /* Использование flexbox */
+    justify-content: center; /* Центрирование содержимого по горизонтали */
+    align-items: center; /* Центрирование содержимого по вертикали */
+}
+
+body.dark-theme .reader-viewport {
+    /* Стили области отображения книги в темной теме. */
+    background-color: var(--dark-card-bg); /* Цвет фона */
+    border-color: var(--dark-border); /* Цвет границы */
+}
+
+#pdfCanvas {
+    /* Стили для элемента canvas, используемого PDF.js для отображения PDF. */
+    margin: 20px 0; /* Внешние отступы сверху и снизу */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1); /* Тень */
+}
+
+.reader-actions {
+    /* Стили для кнопок действий в читалке (закладки, заметки). */
+    display: flex; /* Использование flexbox */
+    gap: 10px; /* Промежуток между кнопками */
+    justify-content: center; /* Центрирование кнопок */
+    flex-wrap: wrap; /* Перенос кнопок на новую строку */
+}
+
+@media (max-width: 768px) {
+    /* Стили для секции читалки на экранах шириной до 768px. */
+    .book-meta {
+        flex-direction: column; /* Элементы располагаются вертикально */
+        align-items: center; /* Выравнивание по центру */
+        text-align: center; /* Выравнивание текста по центру */
+    }
+    
+    .book-details {
+        min-width: auto; /* Автоматическая минимальная ширина */
+    }
+    
+    .reader-controls {
+        justify-content: center; /* Центрирование элементов управления */
+    }
+    
+    .reader-viewport {
+        min-height: 300px; /* Уменьшенная минимальная высота */
+    }
+}
+/* Добавьте этот стиль для чекбоксов в расширенных фильтрах */
+#advancedFilters .checkbox-group {
+    display: flex;
+    flex-direction: column-reverse; /* Метка снизу */
+    align-items: flex-start;
+    gap: 5px;
+    margin-bottom: 15px;
+}
+
+#advancedFilters .checkbox-group input[type="checkbox"] {
+    margin-top: 5px;
+    order: 1; /* Чекбокс будет первым в потоке */
+}
+
+#advancedFilters .checkbox-group label {
+    order: 2; /* Метка будет второй в потоке */
+    font-weight: normal;
+    margin-bottom: 0;
+}
+/* Page Navigation */
+.page-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.page-info {
+    font-size: 1em;
+    margin: 0 10px;
+}
+
+.zoom-select {
+    padding: 8px 12px;
+    border-radius: 5px;
+    border: 1px solid var(--color-border);
+    background-color: var(--color-platinum);
+    color: var(--color-text-dark);
+}
+
+body.dark-theme .zoom-select {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+@media (max-width: 768px) {
+    .page-navigation {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .page-navigation button, 
+    .page-navigation select {
+        width: 100%;
+    }
+}
+.page-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.page-info {
+    font-size: 1em;
+    margin: 0 15px;
+    text-align: center;
+    min-width: 150px;
+}
+
+.book-actions {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-border);
+}
+
+body.dark-theme .book-actions {
+    border-top-color: var(--dark-border);
+}
+
+@media (max-width: 768px) {
+    .page-navigation {
+        flex-direction: row;
+        gap: 10px;
+    }
+    
+    .page-navigation button {
+        order: 1;
+    }
+    
+    .page-info {
+        order: 2;
+        flex-basis: 100%;
+        margin: 10px 0;
+    }
+    
+    .book-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .book-actions button {
+        width: 100%;
+        max-width: 250px;
+    }
+}
+/* Стили для деталей книги */
+#bookDetails {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    background: rgba(0,0,0,0.05);
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+#bookDetails.expanded {
+    max-height: 1000px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.detail-item {
+    display: flex;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+}
+
+.detail-label {
+    font-weight: bold;
+    min-width: 200px;
+    color: var(--color-pine-tree);
+}
+
+.detail-value {
+    flex: 1;
+}
+
+body.dark-theme .detail-label {
+    color: var(--color-reed-green);
+}
+
+/* Специальные отметки */
+.special-mark {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+body.dark-theme .special-mark {
+    color: #ff6b6b;
+}
+
+/* Адаптация для мобильных устройств */
+@media (max-width: 768px) {
+    .detail-item {
+        flex-direction: column;
+    }
+    
+    .detail-label {
+        min-width: 100%;
+        margin-bottom: 4px;
+    }
+}
+/* -- STYLES FOR POPUP (MODAL) -- */
+.popup {
+    display: none; 
+    position: fixed; 
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+.popup-content {
+    background-color: var(--color-platinum);
+    margin: 10% auto;
+    padding: 30px;
+    border: 1px solid var(--color-border);
+    width: 90%; 
+    max-width: 450px;
+    border-radius: 8px;
+    position: relative;
+    box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease-out;
+}
+
+body.dark-theme .popup-content {
+    background-color: var(--dark-card-bg);
+    border-color: var(--dark-border);
+}
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #aaa;
+    font-size: 32px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-popup:hover,
+.close-popup:focus {
+    color: var(--color-text-dark);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+body.dark-theme .close-popup:hover,
+body.dark-theme .close-popup:focus {
+    color: var(--dark-text);
+}
+
+.popup-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.popup-content h2 {
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 25px;
+    border-bottom: none;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.popup-content form label {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+
+.popup-content form input[type="text"],
+.popup-content form input[type="email"],
+.popup-content form input[type="password"] {
+    width: 100%;
+    padding: 12px;
+        box-sizing: border-box; 
+    
+    /* Явное указание стилей для всех полей */
+    background-color: #fff; 
+    border: 1px solid var(--color-border); 
+    color: var(--color-text-dark); /* Цвет текста внутри поля */
+}
+
+/* Стили для полей в темной теме */
+body.dark-theme .popup-content form input[type="text"],
+body.dark-theme .popup-content form input[type="email"],
+body.dark-theme .popup-content form input[type="password"] {
+    background-color: var(--dark-bg);
+    border-color: var(--dark-border);
+    color: var(--dark-text);
+}
+
+.popup-content form button[type="submit"] {
+    margin-top: 10px; 
+    padding: 12px;
+    font-size: 1.1em;
+}
+
+.popup-content form a {
+    font-size: 0.9em;
+    text-align: right;
+    margin-top: -10px;
+}
+
+.popup-content form p {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 0;
+}
+
+.popup-content form p a {
+    font-weight: bold;
+    text-align: center;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
