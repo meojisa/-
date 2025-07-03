@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     const uploadForm = document.getElementById('uploadForm');
-    const API_BASE_URL = 'https://your-api-domain.com/api'; // Замените!
+    const API_BASE_URL = 'https://your-api-domain.com/api'; // Заменить
 
     uploadForm.addEventListener('submit', async (e) => {
         e.preventDefault();
@@ -51,5 +51,4 @@ document.addEventListener('DOMContentLoaded', () => {
         themeToggle.textContent = newTheme === 'dark' ? '☀️' : '🌙';
     });
 
-    // Мб Дополнительные функции для управления книгами (получение, редактирование, удаление) можно добавить здесь
 });
